@@ -46,21 +46,24 @@ oauth2.userinfo = oauth2.userinfo || {};
    * Handler for user profile information which reformats it into
    * oauth2.userinfo.UserInfo form and passes it to the supplied
    * callback.
-   * @param {?Object} data Raw JSON-P response.
+   * @param {?Object} payload Raw JSON-P response.
    * @param {function(?oauth2.userinfo.UserInfo)} callback Response
    *     handler to invoke with the reformatted user information, or
    *     null if the response has no data payload.
    * @private
    */
-  var userInfoHandler_ = function(data, callback) {
+  var userInfoHandler_ = function(payload, callback) {
     var userInfo = null;
-    var payload = data['data'];
+
     if (payload) {
       userInfo = {};
       userInfo.id = payload['id'];
       userInfo.displayName = payload['displayName'];
-      userInfo.thumbnailUrl = payload['thumbnailUrl'];
-      userInfo.profileUrl = payload['profileUrl'];
+      userInfo.thumbnailUrl = payload['image']['url'];
+      userInfo.profileUrl = payload['url'];
+
+      // Seems Google+ doesn't provide email that simple
+      // so there is no such data
       var emails = payload['emails'];
       if (emails) {
         for (var i = 0, maxi = emails.length; i < maxi; ++i) {
@@ -89,7 +92,7 @@ oauth2.userinfo = oauth2.userinfo || {};
     // TODO: switch to a real URI class for this
     var userInfoUrl = (
         config.USER_INFO +
-        '&' +
+        '?' +
         (encodeURIComponent(config.CALLBACK_PARAM) +
          '=' +
          encodeURIComponent(callbackName)) +

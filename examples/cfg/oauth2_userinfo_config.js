@@ -24,7 +24,7 @@ oauth2.userinfo.config = oauth2.userinfo.config || {};
 
 (function() {
 
-  var api = 'https://www.googleapis.com/buzz/v1';
+  var api = 'https://www.googleapis.com/plus/v1';
 
   /**
    * Prefix for JSON-P callback name.
@@ -42,8 +42,7 @@ oauth2.userinfo.config = oauth2.userinfo.config || {};
    * URL for fetching JSON-P profile information.
    * @type {string}
    */
-  oauth2.userinfo.config.USER_INFO = api + '/people/@me/@self' +
-      '?alt=json';
+  oauth2.userinfo.config.USER_INFO = api + '/people/me';
 
   /**
    * URL parameter name for JSON-P callback.

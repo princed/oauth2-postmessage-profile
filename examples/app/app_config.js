@@ -48,12 +48,13 @@ app.config.AUTH_REQUIRED_LIGHTBOX_CANCEL_BUTTON_TEXT = 'Cancel';
 
 /**
  * OAuth 2 client ID.
+ * Obtain client ID at https://developers.google.com/+/web/signin/
  * @type {string}
  */
-app.config.CLIENT = '1031445332935';
+app.config.CLIENT = '<your client ID>';
 
 /**
  * Required OAuth 2 access scope or scopes.
  * @type {string|Array.<string>}
  */
-app.config.SCOPE = ['https://www.googleapis.com/auth/buzz.readonly'];
+app.config.SCOPE = ['https://www.googleapis.com/auth/plus.login'];
